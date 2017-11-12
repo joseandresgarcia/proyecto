@@ -37,28 +37,29 @@ public class pacientes extends javax.swing.JFrame {
         imprimir();
     }
    public  static  void imprimir(){
-      String titulo[]={"idHistoria","Apell.nombr","Direcc.","Correo","Sexo","Telf","Edad","DNI","Lugar nac.","Fecha nac.","Nacion.","Estado c."};
+      String titulo[]={"NºHistoria","Apell.nombr","Direcc.","Correo","Sexo","Telf","fec.nacimiento","DNI","Lugar nac.","Nacion.","Estado c."};
       String datos[]=new String[50];
       try{
            
-                conectar cc= new conectar();
-                Connection cn = cc.conexion();
+            conectar cc= new conectar();
+             Connection cn = cc.conexion();
            Statement instruccion= cn.createStatement();
-           ResultSet tabla=instruccion.executeQuery("select * from  datos_pacientes");
+           ResultSet tabla=instruccion.executeQuery("select * from pacientes");
            table=new DefaultTableModel(null,titulo); 
            while(tabla.next()){
-              datos[0]=tabla.getString("idhistoria");
+               
+              datos[0]=tabla.getString("CodigoPaciente");
               datos[1]=tabla.getString("Apellidos_y_nombres");
               datos[2]=tabla.getString("Direccion");
               datos[3]=tabla.getString("Correo");
               datos[4]=tabla.getString("Sexo");
               datos[5]=tabla.getString("telefono");
-              datos[6]=tabla.getString("Edad");
+              datos[6]=tabla.getString("Fecha_Nacimiento");
               datos[7]=tabla.getString("DNI");
               datos[8]=tabla.getString("Lugar_de_nacimiento");
-              datos[9]=tabla.getString("Fecha_de_nacimiento");
-              datos[10]=tabla.getString("Nacionalidad");
-              datos[11]=tabla.getString("Estado_civil");
+              datos[9]=tabla.getString("Nacionalidad");
+              datos[10]=tabla.getString("Estado_civil");
+          
               
               table.addRow(datos);
            }

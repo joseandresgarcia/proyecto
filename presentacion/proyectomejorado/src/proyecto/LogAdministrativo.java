@@ -26,6 +26,7 @@ public class LogAdministrativo extends javax.swing.JFrame {
           Hospital hospital;
           Controles controles=new Controles();
           Desbloqueo desbloqueo=new Desbloqueo();
+          int perfil;
     /**
      * Creates new form login
      */
@@ -198,58 +199,61 @@ public class LogAdministrativo extends javax.swing.JFrame {
     void calculo(){
         if(i==3)
             {
-                 txtCodigo.setEditable(false);
-                 txtContraseña.setEditable(false);
-                 btnIngresar.setEnabled(false);
-                 btnAtras.setEnabled(false);
-                 btnCerrar.setEnabled(false);
-            
-                JOptionPane.showMessageDialog(this, "EL SISTEMA SE ENCUENTRA BLOQUEADO...¡¡ SOLICITE PERSONAL PARA SU DESBLOQUEO", "Advertencia",
-                                JOptionPane.WARNING_MESSAGE);
-                 
                 
-                  
+                  txtCodigo.setEditable(false);
+                  txtContraseña.setEditable(false);
+                  btnIngresar.setEnabled(false);
+                  btnAtras.setEnabled(false);
+                  btnCerrar.setEnabled(false);
              
-                 desbloqueo.logadministrativo=this;
-                 desbloqueo.setVisible(true);
-                 this.setVisible(false);
+                 
+                  JOptionPane.showMessageDialog(this, "EL SISTEMA SE ENCUENTRA BLOQUEADO...¡¡ SOLICITE PERSONAL PARA SU DESBLOQUEO", "Advertencia",
+                                JOptionPane.WARNING_MESSAGE);
+
+                  desbloqueo.logadministrativo=this;
+                  desbloqueo.setVisible(true);
+                  this.setVisible(false);
                 //dispose();
             }
     }
     
     public void verificar(){
           vcod=txtCodigo.getText();
-         vcontra=txtContraseña.getText();
-         i++; //va contando los intentos de ingreso 
+          vcontra=txtContraseña.getText();
+          i++; //va contando los intentos de ingreso 
         try{
               
                conectar cc= new conectar();
                Connection cn = cc.conexion(); 
         
-             Statement instruccion=cn.createStatement();
+               Statement instruccion=cn.createStatement();
          
-            ResultSet j=instruccion.executeQuery("select count(*),codigo,contraseña from administrativo"
-                    + " where codigo='" + vcod +"' AND contraseña='" + vcontra + "'");
+               ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
+                                                    + " where idusuario='" + vcod +"'");
             if(j.next())
+              {
+              
+                if(j.getString("contrasenia").equals(vcontra))
+                {
+                perfil=j.getInt("Perfil_codigo");     
+                }
+              }
+            if(perfil>0)
             {
-                k=j.getInt("count(*)");
-            }
-           if(k>0){
-             JOptionPane.showMessageDialog(null,"acceso coreccto a administrativo");
+             JOptionPane.showMessageDialog(null,"acceso correccto a administrativo");
              controles.logadministrativo=this;
              controles.setVisible(true);
-             this.setVisible(false);
-               
-           }
-           else{
-           ingresar();
+             this.setVisible(false);              
+            }
+           else
+           {
+            ingresar();
            }
         }
        
           catch(SQLException e)
          { System.out.println(e); }
-         catch(Exception e){ System.out.println(e);}
-          System.out.print("\n");
+        
         
 
     }
