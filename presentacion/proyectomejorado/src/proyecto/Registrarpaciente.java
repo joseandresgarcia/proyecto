@@ -37,6 +37,7 @@ public class Registrarpaciente extends javax.swing.JFrame {
     String imagen;
     String rutaimagen;
      static String nhistoria;
+     static int Codigopaciente;
     
     
     /**
@@ -238,7 +239,7 @@ public class Registrarpaciente extends javax.swing.JFrame {
                             .addComponent(txtcel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,18 +498,18 @@ public class Registrarpaciente extends javax.swing.JFrame {
             archivofoto=new  FileInputStream (rutaimagen);
              //para  insertarlo en nuestra base de datoshacemos lo siguiente 
              //  imagen=setBinaryStream( ,archivofoto);
-              short sex=0;
-             if (sexo.equals("Masculino")){sex=1; }
-           instruccion.executeUpdate("INSERT INTO pacientes(Apellidos_y_nombres,Direccion,Correo,Sexo,telefono"
-                  + ",Fecha_Nacimiento,DNI,Lugar_de_nacimiento,Nacionalidad,Estado_civil,rutaimagen,imagen)"
-                  + "VALUES('"+apenom+"','"+direc+"','"+correo+"','"+Short.toString(sex)+"','"+cel+"','"+fechanacimiento+"','"+dni
-                  +"','"+lugarnac+"','"+nacionalidad+"','"+estadocivil+"','"+rutaimagen+"','"+archivofoto+"')");
-          int Codigopaciente=0;
-           ResultSet  tabla= instruccion.executeQuery("select CodigoPaciente from pacientes where DNI='"+dni+"'");
-           while(tabla.next())
-           {
-               Codigopaciente=tabla.getInt("CodigoPaciente");
-           }   
+     
+
+            instruccion.executeUpdate("INSERT INTO pacientes(Apellidos_y_nombres,Direccion,Correo,Sexo,telefono"
+            + ",Fecha_Nacimiento,DNI,Lugar_de_nacimiento,Nacionalidad,Estado_civil,rutaimagen,imagen)"
+            + "VALUES('"+apenom+"','"+direc+"','"+correo+"','"+sexo+"','"+cel+"','"+fechanacimiento+"','"+dni
+            +"','"+lugarnac+"','"+nacionalidad+"','"+estadocivil+"','"+rutaimagen+"','"+archivofoto+"')");
+            int Codigopaciente=0;
+            ResultSet  tabla= instruccion.executeQuery("select CodigoPaciente from pacientes where DNI='"+dni+"'");
+            while(tabla.next())
+            {
+            Codigopaciente=tabla.getInt("CodigoPaciente");
+            }   
            
            instruccion.executeUpdate("INSERT INTO historiaClinica(NumeroHistoria,CodigoPaciente)"
                   + "VALUES('"+nhistoria+"',"+Integer.toString(Codigopaciente)+")");
@@ -521,7 +522,7 @@ public class Registrarpaciente extends javax.swing.JFrame {
         System.out.print("\n");
         
         
-   
+     imprimir();
      JOptionPane.showMessageDialog(null,"Registro exitoso ");
         
         
