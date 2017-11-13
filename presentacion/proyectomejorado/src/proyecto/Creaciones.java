@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 public class Creaciones extends javax.swing.JFrame {
 CrearArea creararea=new CrearArea();
 CrearCuentas crearcuentas=new CrearCuentas();
-CrearHorario crearhorario=new CrearHorario();
+CrearHorario_new crearhorario=new CrearHorario_new();
 Controles controles;
     /**
      * Creates new form Creaciones
@@ -145,7 +145,7 @@ Controles controles;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    void procesos1(){
+  /*  void procesos1(){
       crearhorario.e=crearhorario.choArea.getSelectedIndex();
       if(crearhorario.e==0){
         crearhorario.choMedicos.setEnabled(false); 
@@ -205,9 +205,9 @@ Controles controles;
         crearhorario.cho7.setEnabled(true);
       }
     }
-    
+    */
     private void btnHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHorariosActionPerformed
-      procesos1();
+     
       crearhorario.creaciones=this;
       crearhorario.setVisible(true);
       this.setVisible(false);

@@ -18,13 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
-/**
- *
- * @author JESUS HAYLEN
- */
+
 public class CrearHorario_new extends javax.swing.JFrame {
-//    Creaciones creaciones;
-//    int e;
+  Creaciones creaciones;
+//   int e;
     /**
      * Creates new form CrearHorario
      */
@@ -107,16 +104,16 @@ public class CrearHorario_new extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        cboArea = new javax.swing.JComboBox<>();
-        cboMedicos = new javax.swing.JComboBox<>();
+        cboArea = new javax.swing.JComboBox<String>();
+        cboMedicos = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cboDia = new javax.swing.JComboBox<>();
+        cboDia = new javax.swing.JComboBox<String>();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        cboInicio = new javax.swing.JComboBox<>();
+        cboInicio = new javax.swing.JComboBox<String>();
         jLabel16 = new javax.swing.JLabel();
-        cboFin = new javax.swing.JComboBox<>();
+        cboFin = new javax.swing.JComboBox<String>();
         btnAlmacenar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHorarios = new javax.swing.JTable();
@@ -136,21 +133,32 @@ public class CrearHorario_new extends javax.swing.JFrame {
             }
         });
 
+        cboMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboMedicosActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("AREA:");
 
         jLabel3.setText("MEDICOS:");
 
-        cboDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO" }));
+        cboDia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO" }));
+        cboDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDiaActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("DIA:");
 
         jLabel15.setText("Inicio");
 
-        cboInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "06:00 A.M.", "07:00 A.M.", "08:00 A.M.", "09:00 A.M.", "10:00 A.M.", "11:00 A.M.", "12:00 P.M.", "01:00 P.M.", "02:00 P.M.", "03:00 P.M.", "04:00 P.M.", "05:00 P.M.", "06:00 P.M.", "07:00 P.M.", "08:00 P.M.", "09:00 P.M.", "10:00 P.M.", "11:00 P.M.", "12:00 A.M." }));
+        cboInicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06:00 A.M.", "07:00 A.M.", "08:00 A.M.", "09:00 A.M.", "10:00 A.M.", "11:00 A.M.", "12:00 P.M.", "01:00 P.M.", "02:00 P.M.", "03:00 P.M.", "04:00 P.M.", "05:00 P.M.", "06:00 P.M.", "07:00 P.M.", "08:00 P.M.", "09:00 P.M.", "10:00 P.M.", "11:00 P.M.", "12:00 A.M." }));
 
         jLabel16.setText("FIn");
 
-        cboFin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "06:00 A.M.", "07:00 A.M.", "08:00 A.M.", "09:00 A.M.", "10:00 A.M.", "11:00 A.M.", "12:00 P.M.", "01:00 P.M.", "02:00 P.M.", "03:00 P.M.", "04:00 P.M.", "05:00 P.M.", "06:00 P.M.", "07:00 P.M.", "08:00 P.M.", "09:00 P.M.", "10:00 P.M.", "11:00 P.M.", "12:00 A.M." }));
+        cboFin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06:00 A.M.", "07:00 A.M.", "08:00 A.M.", "09:00 A.M.", "10:00 A.M.", "11:00 A.M.", "12:00 P.M.", "01:00 P.M.", "02:00 P.M.", "03:00 P.M.", "04:00 P.M.", "05:00 P.M.", "06:00 P.M.", "07:00 P.M.", "08:00 P.M.", "09:00 P.M.", "10:00 P.M.", "11:00 P.M.", "12:00 A.M." }));
 
         btnAlmacenar.setText("ALMACENAR");
         btnAlmacenar.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +243,12 @@ public class CrearHorario_new extends javax.swing.JFrame {
             }
         });
 
-        btnSalir.setText("SALIR");
+        btnSalir.setText("ATRAS");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -321,6 +334,20 @@ public class CrearHorario_new extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+     creaciones.setVisible(true);
+      this.setVisible(false);
+                
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void cboMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMedicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboMedicosActionPerformed
+
+    private void cboDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboDiaActionPerformed
+
     public void Almacenar(String Area,int Medico,String Dia,String HIn, String HFi){
         
         conectar cc= new conectar();
@@ -329,7 +356,7 @@ public class CrearHorario_new extends javax.swing.JFrame {
         Statement instruccion;
         try {
             instruccion = cn.createStatement();
-            int  res= instruccion.executeUpdate("insert into horarios (idDoctores,dia,Hora_inicio,Hora_fin,Area_Codigo) "
+            int  res= instruccion.executeUpdate("insert into horarios (idDoctores,Dia,Hora_inicio,Hora_fin,Area_Codigo) "
                     + "values ("+Integer.toString(Medico)+",'"+Dia+"','"+HIn+"','"+HFi+"','"+Area+"');");
             
             if (res>0){

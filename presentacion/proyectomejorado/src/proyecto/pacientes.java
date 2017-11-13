@@ -344,7 +344,7 @@ public class pacientes extends javax.swing.JFrame {
          
        
       int  j=instruccion.executeUpdate("DELETE FROM pacientes WHERE  CodigoPaciente='"+cp+"'");
-         if(j==1){
+         if(j>0){
              
           imprimir();
              JOptionPane.showMessageDialog(null,"se elimino correctamente ");
