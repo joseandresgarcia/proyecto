@@ -463,7 +463,7 @@ Horario horario=new Horario();
     }//GEN-LAST:event_btnVerActionPerformed
 
     private void choMedicosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choMedicosItemStateChanged
-        creaciones.procesos2(); 
+ //       creaciones.procesos2(); 
     }//GEN-LAST:event_choMedicosItemStateChanged
 
     private void choAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_choAreaMouseClicked
@@ -480,7 +480,7 @@ Horario horario=new Horario();
     }//GEN-LAST:event_choAreaKeyTyped
 
     private void choAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choAreaItemStateChanged
-   creaciones.procesos1();
+  // creaciones.procesos1();
         
 
 // TODO add your handling code here:
