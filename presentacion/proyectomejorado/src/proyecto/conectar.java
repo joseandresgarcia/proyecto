@@ -10,7 +10,7 @@ public  class   conectar {
     public  Connection conexion(){  //metodo
         try {
             Class.forName("com.mysql.jdbc.Driver");//permite que java pueda tener una relacion con mysql
-            conectar=DriverManager.getConnection("jdbc:mysql://localhost/clinica","root","");
+            conectar=DriverManager.getConnection("jdbc:mysql://localhost/clinica","root","root");
                                                    //se refiere a que maquina esta//
         } catch ( SQLException e) {
             System.out.println("no es posible conectar a la base de datos ");

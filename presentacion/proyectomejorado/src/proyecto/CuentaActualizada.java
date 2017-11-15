@@ -91,16 +91,16 @@ public class CuentaActualizada extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         adminconfig.setVisible(true);
-           adminconfig.txtCodactual.setText("");
-           adminconfig.txtContraactual.setText("");
-           adminconfig.txtCodnuevo.setText("");
-           adminconfig.txtContranueva.setText("");
+           //adminconfig.txtCodactual.setText("");
+           //adminconfig.txtContraactual.setText("");
+          /* adminconfig.txtContrasenia.setText("");
+           adminconfig.txtUsuario.setText("");*/
         this.setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
     void procesos(){
-        String x[]=new String[2];
-        x[0]=adminconfig.txtCodnuevo.getText();
-        x[1]=adminconfig.txtContranueva.getText();
+        String x[]=new String[2];/*
+        x[0]=adminconfig.txtContrasenia.getText();
+        x[1]=adminconfig.txtUsuario.getText();*/
         m.addRow(x);
         //logadministrativo.codmomentaneo=x[0];
         //logadministrativo.contramomentaneo=x[1];

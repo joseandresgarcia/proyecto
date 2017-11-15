@@ -5,7 +5,14 @@
  */
 package proyecto;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +23,50 @@ public class AdminConfig extends javax.swing.JFrame {
     /**
      * Creates new form AdminConfig
      */
-    CuentaActualizada cuentaactualizada=new CuentaActualizada();
-    String codactual,codnuevo,contraactual,contranuevo,desbloqueo;
+//    CuentaActualizada cuentaactualizada=new CuentaActualizada();
+  //  String codactual,codnuevo,contraactual,contranuevo,desbloqueo;
     public AdminConfig() {
         initComponents();
+        Listar();
     }
 
+    public void Listar(){
+        
+        conectar cc= new conectar();
+        Connection cn = cc.conexion(); 
+        
+        Statement instruccion;
+        
+        try {
+            instruccion = cn.createStatement();
+            ResultSet  tabla= instruccion.executeQuery(
+                    " select Personal.codigo,idUsuario Usuario,contrasenia,Nombre,Descripcion Perfil,Personal.activo Persona_Activa " +
+                    " from login " +
+                    " inner join Personal on Login.CodigoPersonal=Personal.codigo" +
+                    " inner join Perfil on login.Perfil_codigo=Perfil.codigo;");
+            
+            String Cabecera[]={"código","Usuario","contrasenia","Nombre","Perfil","activo"};
+            String Datos[][]={};
+            DefaultTableModel tab=new DefaultTableModel(Datos,Cabecera);
+            tblUsuario.setModel(tab);
+            
+            while(tabla.next())
+            {
+                Object LisaHorario[]={
+                    tabla.getString("COdigo"),
+                    tabla.getString("Usuario"),
+                    tabla.getString("Contrasenia"),
+                    tabla.getString("Nombre"),
+                    tabla.getString("Perfil"),
+                    tabla.getBoolean("Persona_Activa")};
+                tab.addRow(LisaHorario);
+            }    
+    
+        } catch (SQLException ex) {
+            Logger.getLogger(CrearHorario_new.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,70 +76,118 @@ public class AdminConfig extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAtras = new javax.swing.JButton();
-        btnListo = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtCodactual = new javax.swing.JTextPane();
-        jLabel5 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtCodnuevo = new javax.swing.JTextPane();
-        txtContraactual = new javax.swing.JPasswordField();
-        txtContranueva = new javax.swing.JPasswordField();
-        btnVer = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        txtUsuario = new javax.swing.JTextField();
+        txtContrasenia = new javax.swing.JTextField();
+        btnAtras = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblUsuario = new javax.swing.JTable();
+        btnDesactivar = new javax.swing.JButton();
+        btnActivar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnAtras.setText("ATRAS");
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Configuraciones de Cuentas"));
+
+        jLabel6.setText("CONTRASEÑA NUEVA:");
+
+        jLabel1.setText("USUARIO");
+
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        txtUsuario.setEditable(false);
+        txtUsuario.setBackground(new java.awt.Color(204, 255, 204));
+
+        btnAtras.setText("ATRÁS");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtrasActionPerformed(evt);
             }
         });
 
-        btnListo.setText("LISTO");
-        btnListo.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtUsuario)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addComponent(btnAtras)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGuardar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtContrasenia)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel6))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 64, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtras))
+                .addContainerGap())
+        );
+
+        tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblUsuario);
+
+        btnDesactivar.setText("DESACTIVAR USUARIO");
+        btnDesactivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListoActionPerformed(evt);
+                btnDesactivarActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("CODIGO ACTUAL:");
-
-        jLabel2.setText("CONTRASEÑA ACTUAL:");
-
-        jLabel3.setText("CONFIGURACION  DE CUENTAS");
-
-        jLabel4.setText("ADMINISTRATIVOS:");
-
-        jScrollPane1.setViewportView(txtCodactual);
-
-        jLabel5.setText("CODIGO NUEVOL:");
-
-        jLabel6.setText("CONTRASEÑA NUEVA:");
-
-        jScrollPane3.setViewportView(txtCodnuevo);
-
-        txtContraactual.addActionListener(new java.awt.event.ActionListener() {
+        btnActivar.setText("ACTIVAR USUARIO");
+        btnActivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraactualActionPerformed(evt);
+                btnActivarActionPerformed(evt);
             }
         });
 
-        txtContranueva.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setText("MODIFICAR CONTRASEÑA");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContranuevaActionPerformed(evt);
-            }
-        });
-
-        btnVer.setText("VER CAMBIOS");
-        btnVer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
 
@@ -103,139 +196,131 @@ public class AdminConfig extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAtras))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtContranueva, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1)
-                                    .addComponent(btnListo))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                            .addComponent(txtContraactual))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addComponent(btnVer)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jLabel3)
+                        .addComponent(btnModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDesactivar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnActivar))
+                    .addComponent(jScrollPane1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtContraactual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(txtContranueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnListo)
-                    .addComponent(btnVer))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(btnAtras)
-                .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDesactivar)
+                            .addComponent(btnActivar)
+                            .addComponent(btnModificar))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtContraactualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraactualActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraactualActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String Usuario, Contrasenia;
+        Usuario=txtUsuario.getText();
+        Contrasenia=txtContrasenia.getText();
+        if (!Usuario.isEmpty() && !Contrasenia.isEmpty()){
+            conectar cc= new conectar();
+            Connection cn = cc.conexion();
+            Statement instruccion;
+            try {
+                instruccion = cn.createStatement();
+                int  res= instruccion.executeUpdate("UPDATE lOGIN SET CONTRASENIA='"+Contrasenia+"' WHERE IDUSUARIO='"+Usuario+"';");
 
-    private void txtContranuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContranuevaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContranuevaActionPerformed
+                if (res>0){
+                    JOptionPane.showMessageDialog(null, "SE ACTUALIZO LA CONTRASEÑA DE " + Usuario.toUpperCase());
+                }else
+                    JOptionPane.showMessageDialog(null, "NO SE PUEDO ACTUALIZAR" );
 
-    private void btnListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListoActionPerformed
-       codactual=txtCodactual.getText();
-       contraactual=txtContraactual.getText();
-       codnuevo=txtCodnuevo.getText();
-       contranuevo=txtContranueva.getText();
-        if(codactual.compareTo("2017123")==0 && contraactual.compareTo("medicina123")==0)
-        {
-        desbloqueo=JOptionPane.showInputDialog("INGRESE CODIGO DE DESBLOQUEO");
-        if(desbloqueo.compareTo("40044medicina")==0)
-        { 
-           JOptionPane.showMessageDialog(null,"CONFIGURACION DE CUENTA SE RELIZO CON EXITO");
-          
-           cuentaactualizada.adminconfig=this;
-           cuentaactualizada.setVisible(true);
-           this.setVisible(false);
-           cuentaactualizada.procesos();
- 
+            } catch (SQLException ex) {
+                Logger.getLogger(CrearHorario_new.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Listar();
+            txtUsuario.setText("");
+            txtContrasenia.setText("");
         }
-        else
-        {               
-           JOptionPane.showMessageDialog(this, "ERROR EN EL CODIGO DE DESBLOQUEO..¡¡", "ERROR",
-                                JOptionPane.ERROR_MESSAGE);
-           txtCodactual.setText("");
-           txtContraactual.setText("");
-           txtCodnuevo.setText("");
-           txtContranueva.setText("");   
-           
-        }
-        }
-        else{
-           JOptionPane.showMessageDialog(this, "ERROR EN LA CUENTA ACTUAL..¡¡", "ERROR",
-                                JOptionPane.ERROR_MESSAGE);
-           txtCodactual.setText("");
-           txtContraactual.setText("");
-           txtCodnuevo.setText("");
-           txtContranueva.setText(""); 
-        }
-    }//GEN-LAST:event_btnListoActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
-       cuentaactualizada.adminconfig=this;
-       cuentaactualizada.setVisible(true);
-       this.setVisible(false);
-    }//GEN-LAST:event_btnVerActionPerformed
-
+    
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
         crearcuentas.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+        int fila=tblUsuario.getSelectedRow();
+        if (fila>-1){
+            String Usuario=tblUsuario.getValueAt(fila, 1).toString();
+            String Contrasenia=tblUsuario.getValueAt(fila, 2).toString();
+            txtUsuario.setText(Usuario);
+            txtContrasenia.setText(Contrasenia);
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
+        // TODO add your handling code here:
+            int fila=tblUsuario.getSelectedRow();
+            if (fila>-1){
+                int Codigo=Integer.parseInt(tblUsuario.getValueAt(fila, 0).toString());
+                
+                conectar cc= new conectar();
+                Connection cn = cc.conexion();
+                Statement instruccion;
+                try {
+                    instruccion = cn.createStatement();
+                    int  res= instruccion.executeUpdate("UPDATE PERSONAL SET ACTIVO=1 WHERE CODIGO="+Codigo+";");
+
+                    if (res>0){
+                        JOptionPane.showMessageDialog(null, "SE ACTIVO AL PERSONAL: ");
+                    }else
+                        JOptionPane.showMessageDialog(null, "NO SE PUDO ACTIVAR" );
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(CrearHorario_new.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Listar();
+            }
+    }//GEN-LAST:event_btnActivarActionPerformed
+
+    private void btnDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesactivarActionPerformed
+        // TODO add your handling code here:
+            int fila=tblUsuario.getSelectedRow();
+            if (fila>-1){
+                int Codigo=Integer.parseInt(tblUsuario.getValueAt(fila, 0).toString());
+                
+                conectar cc= new conectar();
+                Connection cn = cc.conexion();
+                Statement instruccion;
+                try {
+                    instruccion = cn.createStatement();
+                    int  res= instruccion.executeUpdate("UPDATE PERSONAL SET ACTIVO=0 WHERE CODIGO="+Integer.toString(Codigo)+";");
+
+                    if (res>0){
+                        JOptionPane.showMessageDialog(null, "SE DESACTIVO AL PERSONAL ");
+                    }else
+                        JOptionPane.showMessageDialog(null, "NO SE PUDO DESACTIVAR" );
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(CrearHorario_new.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Listar();
+            }
+    }//GEN-LAST:event_btnDesactivarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,20 +359,17 @@ public class AdminConfig extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActivar;
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnListo;
-    private javax.swing.JButton btnVer;
+    private javax.swing.JButton btnDesactivar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    public javax.swing.JTextPane txtCodactual;
-    public javax.swing.JTextPane txtCodnuevo;
-    public javax.swing.JPasswordField txtContraactual;
-    public javax.swing.JPasswordField txtContranueva;
+    private javax.swing.JTable tblUsuario;
+    private javax.swing.JTextField txtContrasenia;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
