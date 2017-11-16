@@ -5,6 +5,11 @@
  */
 package proyecto;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +18,10 @@ import javax.swing.JOptionPane;
  */
 public class CuentasInformes extends javax.swing.JFrame {
     CrearCuentas crearcuentas;
+    String nombre,documento,pais,provincia,distrito,direccion,
+            codigo,contraseña,especialidad,area,estadocivil,fecharegistro,fechanacimiento,activo;
+    int año,mes,dia,año1,mes1,dia1;
+        Double sueldo,sueldoextra;
     /**
      * Creates new form Informes
      */
@@ -350,7 +359,7 @@ public class CuentasInformes extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        choEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "DESACTIVO" }));
+        choEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DESACTIVO", "ACTIVO" }));
 
         jLabel3.setText("ESTADO DE TRABAJADOR:");
 
@@ -446,7 +455,51 @@ public class CuentasInformes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnArchivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivarActionPerformed
-        
+       
+      
+        try{
+            conectar cc= new conectar();
+            Connection cn = cc.conexion();
+
+            Statement instruccion= cn.createStatement();
+                    año = Cfecha.getCalendar().get(Calendar.YEAR);
+                    mes = Cfecha.getCalendar().get(Calendar.MONTH);
+                    dia = Cfecha.getCalendar().get(Calendar.DAY_OF_MONTH);
+                    fecharegistro=""+dia+mes+año;
+                    nombre=txtNombre.getText();
+                    año1 = Cnacimiento.getCalendar().get(Calendar.YEAR);
+                    mes1 = Cnacimiento.getCalendar().get(Calendar.MONTH);
+                    dia1 = Cnacimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
+                    fechanacimiento=""+dia1+mes1+año1;
+                    documento=txtDocumento.getText();
+                    area=(choArea.getSelectedItem().toString());//esto creo en perfiles tambien va
+                    especialidad=(choEspecialidad.getSelectedItem().toString());//esto no esta en la tabla de la bsdts personal
+                    pais=txtPais.getText();
+                    provincia=txtProvincia.getText();
+                    distrito=txtDistrito.getText();
+                    direccion=txtDireccion.getText();
+                    sueldo=Double.parseDouble(txtSueldo.getText());
+                    sueldoextra=Double.parseDouble(txtSueldoextra.getText());
+                    codigo=txtCodigo.getText();//esto creo se comparte con otras 2 tablas perfiles y login creo
+                    contraseña=txtContraseña.getText();//tampoco login creo
+                    estadocivil=(choEstadocivil.getSelectedItem().toString());
+                    activo=(Integer.toString(choEstado.getSelectedIndex()));
+
+            ResultSet  tabla= instruccion.executeQuery("select * from personal");
+            while(tabla.next())
+            {}
+            instruccion.executeUpdate("INSERT INTO personal(codigo,nombre,fecha_nacimiento,DNI,estado_civil,"
+                    + "especialidad,pais,provincia,distrito,direccion,sueldo_por_hora,"
+                    + "sueldo_horas_extras,fecha_de_registro,Activo)VALUES('"+codigo+"','"+nombre+"','"+fechanacimiento+"','"+documento+"','"+
+                    estadocivil+"','"+area+"','"+pais+"','"+provincia+"','"+distrito+"','"+direccion+"','"+sueldo+"','"+sueldoextra+"','"+fechanacimiento+"','"+
+                    activo+"')");
+
+        }
+
+        catch(SQLException e)
+        { System.out.println(e); }
+        catch(Exception e){ System.out.println(e);}
+        System.out.print("\n");
         
         JOptionPane.showMessageDialog(null,"SE REGISTRO EL NUEVO TRABAJADOR CON EXITO");
     }//GEN-LAST:event_btnArchivarActionPerformed
@@ -456,6 +509,24 @@ public class CuentasInformes extends javax.swing.JFrame {
         int q=choArea.getSelectedIndex();
         if(q==2){
             choEspecialidad.setEnabled(true);
+        try{
+
+            conectar cc= new conectar();
+            Connection cn = cc.conexion();
+
+            Statement instruccion= cn.createStatement();
+            ResultSet  tabla= instruccion.executeQuery("select * from areas");
+             while(tabla.next()){      
+            
+            choEspecialidad.addItem(tabla.getString("Areas_disponibles"));
+           }  
+        }
+
+        catch(SQLException e)
+        { System.out.println(e); }
+        catch(Exception e){ System.out.println(e);}
+        System.out.print("\n");
+
         
     }
             
