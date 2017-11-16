@@ -35,10 +35,6 @@ public class CrearCuentas extends javax.swing.JFrame {
 
         btnAtras = new javax.swing.JButton();
         btnInformes = new javax.swing.JButton();
-        btnMedicos = new javax.swing.JButton();
-        btnAdmision = new javax.swing.JButton();
-        btnCaja = new javax.swing.JButton();
-        btnTriaje = new javax.swing.JButton();
         btnConfigadministracion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,38 +46,10 @@ public class CrearCuentas extends javax.swing.JFrame {
             }
         });
 
-        btnInformes.setText("INFORMES");
+        btnInformes.setText("PERSONAL DE TRABAJO");
         btnInformes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInformesActionPerformed(evt);
-            }
-        });
-
-        btnMedicos.setText("MEDICOS");
-        btnMedicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMedicosActionPerformed(evt);
-            }
-        });
-
-        btnAdmision.setText("ADMISION");
-        btnAdmision.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmisionActionPerformed(evt);
-            }
-        });
-
-        btnCaja.setText("CAJA");
-        btnCaja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCajaActionPerformed(evt);
-            }
-        });
-
-        btnTriaje.setText("TRIAJE");
-        btnTriaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTriajeActionPerformed(evt);
             }
         });
 
@@ -96,39 +64,25 @@ public class CrearCuentas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnInformes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMedicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTriaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnConfigadministracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAdmision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAtras)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnConfigadministracion, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInformes, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInformes)
-                    .addComponent(btnMedicos)
-                    .addComponent(btnAdmision))
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCaja)
-                    .addComponent(btnTriaje)
-                    .addComponent(btnConfigadministracion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addComponent(btnInformes, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnConfigadministracion, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(btnAtras)
                 .addGap(30, 30, 30))
         );
@@ -147,35 +101,11 @@ public class CrearCuentas extends javax.swing.JFrame {
        this.setVisible(false);
     }//GEN-LAST:event_btnInformesActionPerformed
 
-    private void btnAdmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmisionActionPerformed
-       cuentasadmision.crearcuentas=this;
-       cuentasadmision.setVisible(true);
-       this.setVisible(false);
-    }//GEN-LAST:event_btnAdmisionActionPerformed
-
     private void btnConfigadministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigadministracionActionPerformed
         adminconfig.crearcuentas=this;
         adminconfig.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnConfigadministracionActionPerformed
-
-    private void btnMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicosActionPerformed
-        cuentasmedicos.crearcuentas=this;
-        cuentasmedicos.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnMedicosActionPerformed
-
-    private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
-       cuentascaja.crearcuentas=this;
-       cuentascaja.setVisible(true);
-       this.setVisible(false);
-    }//GEN-LAST:event_btnCajaActionPerformed
-
-    private void btnTriajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTriajeActionPerformed
-       cuentastriaje.crearcuentas=this;
-       cuentastriaje.setVisible(true);
-       this.setVisible(false);
-    }//GEN-LAST:event_btnTriajeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,12 +146,8 @@ public class CrearCuentas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdmision;
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnCaja;
     private javax.swing.JButton btnConfigadministracion;
     private javax.swing.JButton btnInformes;
-    private javax.swing.JButton btnMedicos;
-    private javax.swing.JButton btnTriaje;
     // End of variables declaration//GEN-END:variables
 }
