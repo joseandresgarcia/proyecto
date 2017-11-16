@@ -5,9 +5,14 @@
  */
 package proyecto;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -17,6 +22,11 @@ import javax.swing.JPanel;
 public class LogInfomes extends javax.swing.JFrame {
 Hospital hospital;
 INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
+
+          int perfil;
+          String codigo,contraseña,vcod,vcontra;
+
+
     /**
      * Creates new form LogCaja
      */
@@ -28,6 +38,52 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
         
         
     }
+    
+     
+      public   void    ingresar  (){
+           vcod=txtcod.getText();
+           vcontra=txtcontra.getText();
+         
+        try{
+               
+               conectar cc= new conectar();
+               Connection cn = cc.conexion(); 
+        
+               Statement instruccion=cn.createStatement();
+         
+               ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
+                                                    + " where idusuario='" + vcod +"'");
+               if(j.next())
+               {
+              
+                if(j.getString("contrasenia").equals(vcontra))
+                {
+                perfil=j.getInt("Perfil_codigo");     
+                }
+                else{  JOptionPane.showMessageDialog(null,"contraseña incorrecta"); }
+              
+                 if(perfil>0)
+                  {
+                      informedepasientes.logininforme=this;
+                      informedepasientes.setVisible(true);
+                      this.setVisible(false);
+                            
+                  }
+               }
+
+              else
+              {
+             JOptionPane.showMessageDialog(null,"error  ,intente de nuevo ");
+             }
+            }
+       
+            catch(SQLException e)
+            { System.out.println(e); }
+  
+
+          }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,8 +96,8 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
 
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtcod = new javax.swing.JTextPane();
+        txtcontra = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         ingresarinformes = new javax.swing.JButton();
@@ -52,11 +108,11 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel3.setText("USUARIO DE INFORMES");
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(txtcod);
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        txtcontra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                txtcontraActionPerformed(evt);
             }
         });
 
@@ -98,7 +154,7 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtcontra, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel3)))
@@ -116,7 +172,7 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcontra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ingresarinformes)
@@ -127,9 +183,9 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void txtcontraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_txtcontraActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         hospital.setVisible(true);
@@ -138,13 +194,7 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void ingresarinformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarinformesActionPerformed
-    
-        
-        
-        
-        informedepasientes.logininforme=this;
-        informedepasientes.setVisible(true);
-        this.setVisible(false);
+     ingresar();
         
         
     }//GEN-LAST:event_ingresarinformesActionPerformed
@@ -191,8 +241,8 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane txtcod;
+    private javax.swing.JPasswordField txtcontra;
     // End of variables declaration//GEN-END:variables
 }

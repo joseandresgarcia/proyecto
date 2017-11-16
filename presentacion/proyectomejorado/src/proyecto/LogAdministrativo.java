@@ -15,25 +15,21 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import static jdk.nashorn.internal.objects.NativeDate.getDate;
-import static proyecto.pacientes.imprimir;
+
 
 /**
  *
  * @author JESUS HAYLEN
  */
-public class LogAdministrativo extends javax.swing.JFrame {
+public class  LogAdministrativo extends javax.swing.JFrame {
           Hospital hospital;
           Controles controles=new Controles();
           Desbloqueo desbloqueo=new Desbloqueo();
           int perfil;
-    /**
-     * Creates new form login
-     */
-    String codigo,contraseña,vcod,vcontra;
+          String codigo,contraseña,vcod,vcontra;
     
-    int i;
-    int k=0;
+          int i;
+          int k=0;
     public LogAdministrativo() {
         initComponents();
              //DISEÑO 
@@ -45,13 +41,7 @@ public class LogAdministrativo extends javax.swing.JFrame {
         ImageIcon(this.getClass().getResource("/imagenes/fondo_1.png")); JLabel fondo2= new JLabel();
         fondo2.setIcon(dos); getLayeredPane().add(fondo2,JLayeredPane.FRAME_CONTENT_LAYER);
         fondo2.setBounds(0,0,dos.getIconWidth(),dos.getIconHeight());    
-        
-        
-        
-        
-        
-        
-        
+
         
     }
 
@@ -196,7 +186,7 @@ public class LogAdministrativo extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         verificar();
         }
-    void calculo(){
+    void  calculo(){
         if(i==3)
             {
                 
@@ -217,7 +207,7 @@ public class LogAdministrativo extends javax.swing.JFrame {
             }
     }
     
-    public void verificar(){
+    public   void verificar(){
           vcod=txtCodigo.getText();
           vcontra=txtContraseña.getText();
           i++; //va contando los intentos de ingreso 
@@ -230,41 +220,38 @@ public class LogAdministrativo extends javax.swing.JFrame {
          
                ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
                                                     + " where idusuario='" + vcod +"'");
-            if(j.next())
-              {
-              
-                if(j.getString("contrasenia").equals(vcontra))
-                {
-                perfil=j.getInt("Perfil_codigo");     
+                if(j.next())
+                {    
+                  if(j.getString("contrasenia").equals(vcontra))
+                  {
+                   perfil=j.getInt("Perfil_codigo");     
+                  }
+               
+                  
+                  if(perfil>0)
+                  {
+                  controles.logadministrativo=this;
+                  controles.setVisible(true);
+                  this.setVisible(false);              
                 }
               }
-            if(perfil>0)
-            {
-             JOptionPane.showMessageDialog(null,"acceso correccto a administrativo");
-             controles.logadministrativo=this;
-             controles.setVisible(true);
-             this.setVisible(false);              
-            }
+            
            else
            {
-            ingresar();
+           ingresar();
            }
         }
        
           catch(SQLException e)
          { System.out.println(e); }
-        
-        
+  
 
     }
              
   
     
-    void ingresar(){
-        
-         
-    
-         
+         void    ingresar(){
+  
              calculo(); 
                 if(i==1)
                 {    

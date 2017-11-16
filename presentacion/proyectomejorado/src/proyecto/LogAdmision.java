@@ -5,9 +5,14 @@
  */
 package proyecto;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,9 +23,10 @@ public class LogAdmision extends javax.swing.JFrame {
 Hospital hospital;
 citas cita=new citas();
 TipoPaciente tipopaciente=new TipoPaciente();
-/**
-     * Creates new form LogAdmision
-     */
+
+int perfil;
+String codigo,contraseña,vcod,vcontra;
+
     public LogAdmision() {
         initComponents();
             //DISEÑO 
@@ -38,6 +44,53 @@ TipoPaciente tipopaciente=new TipoPaciente();
         
         
     }
+    
+    public   void    ingresar  (){
+           vcod=txtcod.getText();
+           vcontra=txtadmisi.getText();
+         
+        try{
+               
+               conectar cc= new conectar();
+               Connection cn = cc.conexion(); 
+        
+               Statement instruccion=cn.createStatement();
+         
+               ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
+                                                    + " where idusuario='" + vcod +"'");
+               if(j.next())
+               {
+              
+                if(j.getString("contrasenia").equals(vcontra))
+                {
+                perfil=j.getInt("Perfil_codigo");     
+                }
+               else{  JOptionPane.showMessageDialog(null,"contraseña incorrecta"); }
+                 if(perfil>0)
+                  {
+                
+                  tipopaciente.logadmision=this;
+                  tipopaciente.setVisible(true);
+                  this.setVisible(false);           
+                  }
+                  }
+            
+               else
+              {
+             JOptionPane.showMessageDialog(null,"error  ,intente de nuevo ");
+             }
+          }
+       
+            catch(SQLException e)
+            { System.out.println(e); }
+  
+
+          }
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,8 +103,8 @@ TipoPaciente tipopaciente=new TipoPaciente();
 
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtcod = new javax.swing.JTextPane();
+        txtadmisi = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnIngresar = new javax.swing.JButton();
@@ -62,11 +115,11 @@ TipoPaciente tipopaciente=new TipoPaciente();
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel3.setText("USUARIO DE ADMISION");
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(txtcod);
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        txtadmisi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                txtadmisiActionPerformed(evt);
             }
         });
 
@@ -108,7 +161,7 @@ TipoPaciente tipopaciente=new TipoPaciente();
                             .addComponent(jLabel2))
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtadmisi, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
@@ -124,7 +177,7 @@ TipoPaciente tipopaciente=new TipoPaciente();
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtadmisi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar)
@@ -135,9 +188,9 @@ TipoPaciente tipopaciente=new TipoPaciente();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void txtadmisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtadmisiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_txtadmisiActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         hospital.setVisible(true);
@@ -146,13 +199,8 @@ TipoPaciente tipopaciente=new TipoPaciente();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        /*cita.admision=this;
-        cita.setVisible(true);
-        this.setVisible(false);*/
-        tipopaciente.logadmision=this;
-        tipopaciente.setVisible(true);
-        this.setVisible(false);
-        
+     
+   ingresar();
         
         
     }//GEN-LAST:event_btnIngresarActionPerformed
@@ -198,8 +246,8 @@ TipoPaciente tipopaciente=new TipoPaciente();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JPasswordField txtadmisi;
+    private javax.swing.JTextPane txtcod;
     // End of variables declaration//GEN-END:variables
 }
