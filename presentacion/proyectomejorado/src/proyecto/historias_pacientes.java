@@ -16,6 +16,9 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class historias_pacientes extends javax.swing.JFrame {
+    
+    
+     Historiaclinica x=new Historiaclinica();
      LogMedicos medicos;
      static  DefaultTableModel table;
      public historias_pacientes() {
@@ -82,6 +85,7 @@ public class historias_pacientes extends javax.swing.JFrame {
         abrir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,10 +150,17 @@ public class historias_pacientes extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jLabel2.setText("ATENCION AL PACIENTE ");
 
-        jButton1.setText("ATRAS");
+        jButton1.setText("CERRAR ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("LIMPIAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -164,13 +175,19 @@ public class historias_pacientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(abrir)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(abrir)))
+                        .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(77, 77, 77))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +204,9 @@ public class historias_pacientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(39, 39, 39))
         );
 
@@ -216,11 +235,30 @@ public class historias_pacientes extends javax.swing.JFrame {
       
                int fila=tabla02.getSelectedRow();
                 if (fila>-1){
-                String  nhistoria=tabla02.getValueAt(fila, 1).toString();
+                String  nhistoria=tabla02.getValueAt(fila, 2).toString();
            
+              
                 txtnhistoria.setText(nhistoria);
+
+                
+                
+                    x.historias=this;
+                    x.setVisible(true);
+                   this.setVisible(true);
                 }
         
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
         
         
     }//GEN-LAST:event_abrirActionPerformed
@@ -254,6 +292,12 @@ public class historias_pacientes extends javax.swing.JFrame {
     medicos.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      
+         txtnhistoria.setText("");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,10 +337,11 @@ public class historias_pacientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrir;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable tabla02;
-    private javax.swing.JTextField txtnhistoria;
+    public static javax.swing.JTextField txtnhistoria;
     // End of variables declaration//GEN-END:variables
 }
