@@ -61,7 +61,7 @@ LogMedicos medicos=new LogMedicos();
     
      class hora implements ActionListener{
    
-        public void actionPerformed(ActionEvent e) {
+     public void actionPerformed(ActionEvent e) {
             Date sisthora=new Date();
             String pmAm="hh:mm:ss a";
             SimpleDateFormat format=new  SimpleDateFormat(pmAm);

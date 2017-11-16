@@ -6,7 +6,6 @@
 package proyecto;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,8 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import static jdk.nashorn.internal.objects.NativeDate.getDate;
-import static proyecto.pacientes.imprimir;
+
 
 /**
  *
@@ -229,15 +227,14 @@ public class LogAdministrativo extends javax.swing.JFrame {
                Statement instruccion=cn.createStatement();
          
                ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
-                                                    + " where idusuario='" + vcod +"'");
+                                                    +" where idusuario='" + vcod +"'");
             if(j.next())
-              {
-              
+            {
                 if(j.getString("contrasenia").equals(vcontra))
                 {
-                perfil=j.getInt("Perfil_codigo");     
+                 perfil=j.getInt("Perfil_codigo");     
                 }
-              }
+            
             if(perfil>0)
             {
              JOptionPane.showMessageDialog(null,"acceso correccto a administrativo");
@@ -245,11 +242,14 @@ public class LogAdministrativo extends javax.swing.JFrame {
              controles.setVisible(true);
              this.setVisible(false);              
             }
-           else
-           {
-            ingresar();
-           }
-        }
+            }
+            else
+            {
+                
+                ingresar();
+                               
+            }
+          }
        
           catch(SQLException e)
          { System.out.println(e); }
