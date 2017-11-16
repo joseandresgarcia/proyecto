@@ -104,16 +104,16 @@ public class CrearHorario_new extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        cboArea = new javax.swing.JComboBox<String>();
-        cboMedicos = new javax.swing.JComboBox<String>();
+        cboArea = new javax.swing.JComboBox<>();
+        cboMedicos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cboDia = new javax.swing.JComboBox<String>();
+        cboDia = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        cboInicio = new javax.swing.JComboBox<String>();
+        cboInicio = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        cboFin = new javax.swing.JComboBox<String>();
+        cboFin = new javax.swing.JComboBox<>();
         btnAlmacenar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHorarios = new javax.swing.JTable();
@@ -143,7 +143,7 @@ public class CrearHorario_new extends javax.swing.JFrame {
 
         jLabel3.setText("MEDICOS:");
 
-        cboDia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO" }));
+        cboDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO" }));
         cboDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboDiaActionPerformed(evt);
@@ -154,11 +154,11 @@ public class CrearHorario_new extends javax.swing.JFrame {
 
         jLabel15.setText("Inicio");
 
-        cboInicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06:00 A.M.", "07:00 A.M.", "08:00 A.M.", "09:00 A.M.", "10:00 A.M.", "11:00 A.M.", "12:00 P.M.", "01:00 P.M.", "02:00 P.M.", "03:00 P.M.", "04:00 P.M.", "05:00 P.M.", "06:00 P.M.", "07:00 P.M.", "08:00 P.M.", "09:00 P.M.", "10:00 P.M.", "11:00 P.M.", "12:00 A.M." }));
+        cboInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "06:00 A.M.", "07:00 A.M.", "08:00 A.M.", "09:00 A.M.", "10:00 A.M.", "11:00 A.M.", "12:00 P.M.", "01:00 P.M.", "02:00 P.M.", "03:00 P.M.", "04:00 P.M.", "05:00 P.M.", "06:00 P.M.", "07:00 P.M.", "08:00 P.M.", "09:00 P.M.", "10:00 P.M.", "11:00 P.M.", "12:00 A.M." }));
 
         jLabel16.setText("FIn");
 
-        cboFin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06:00 A.M.", "07:00 A.M.", "08:00 A.M.", "09:00 A.M.", "10:00 A.M.", "11:00 A.M.", "12:00 P.M.", "01:00 P.M.", "02:00 P.M.", "03:00 P.M.", "04:00 P.M.", "05:00 P.M.", "06:00 P.M.", "07:00 P.M.", "08:00 P.M.", "09:00 P.M.", "10:00 P.M.", "11:00 P.M.", "12:00 A.M." }));
+        cboFin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "06:00 A.M.", "07:00 A.M.", "08:00 A.M.", "09:00 A.M.", "10:00 A.M.", "11:00 A.M.", "12:00 P.M.", "01:00 P.M.", "02:00 P.M.", "03:00 P.M.", "04:00 P.M.", "05:00 P.M.", "06:00 P.M.", "07:00 P.M.", "08:00 P.M.", "09:00 P.M.", "10:00 P.M.", "11:00 P.M.", "12:00 A.M." }));
 
         btnAlmacenar.setText("ALMACENAR");
         btnAlmacenar.addActionListener(new java.awt.event.ActionListener() {
@@ -181,15 +181,14 @@ public class CrearHorario_new extends javax.swing.JFrame {
                             .addComponent(jLabel15)
                             .addComponent(jLabel16))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(cboDia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cboMedicos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cboArea, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cboDia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboMedicos, 0, 181, Short.MAX_VALUE)
                             .addComponent(cboInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboFin, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cboFin, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAlmacenar)
