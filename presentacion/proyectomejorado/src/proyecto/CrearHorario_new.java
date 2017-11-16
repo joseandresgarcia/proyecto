@@ -288,21 +288,7 @@ public class CrearHorario_new extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    /*
-    void almacen(){
-            
-        x[0]=String.valueOf(cboArea.getSelectedItem());
-        x[1]=String.valueOf(cboMedicos.getSelectedItem());
-        x[2]="  "+l1+"-"+l2+" "+String.valueOf(co1.getSelectedItem());
-        x[3]="  "+m1+"-"+m2+" "+String.valueOf(cho2.getSelectedItem());
-        x[4]="  "+mi1+"-"+mi2+" "+String.valueOf(cho3.getSelectedItem());
-        x[5]="  "+j1+"-"+j2+" "+String.valueOf(cho4.getSelectedItem());
-        x[6]="  "+v1+"-"+v2+" "+String.valueOf(cho5.getSelectedItem());
-        x[7]="  "+s1+"-"+s2+" "+String.valueOf(cho6.getSelectedItem());
-        x[8]="  "+d1+"-"+d2+" "+String.valueOf(cho7.getSelectedItem());
-        
-            
-        }*/
+  
     private void cboAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAreaActionPerformed
         ComboBoxString controlArea=(ComboBoxString)cboArea.getSelectedItem();
         medicos(controlArea.getID());
