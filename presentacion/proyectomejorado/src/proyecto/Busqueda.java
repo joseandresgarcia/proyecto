@@ -324,9 +324,9 @@ public class Busqueda extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         String Areas,Medicos;
-        if (!cboArea.getSelectedItem().toString().equals("Elegir")){Areas=cboArea.getSelectedItem().toString();} else Areas="";
-        if (!cboMedicos.getSelectedItem().toString().equals("Elegir")){Medicos=cboMedicos.getSelectedItem().toString();}else Medicos="";
-        Listar_Horarios(Areas,Medicos);
+          if (!cboArea.getSelectedItem().toString().equals("Elegir")){Areas=cboArea.getSelectedItem().toString();} else Areas="";
+          if (!cboMedicos.getSelectedItem().toString().equals("Elegir")){Medicos=cboMedicos.getSelectedItem().toString();}else Medicos="";
+          Listar_Horarios(Areas,Medicos);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**

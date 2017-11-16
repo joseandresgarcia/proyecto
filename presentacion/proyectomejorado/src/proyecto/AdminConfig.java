@@ -106,6 +106,20 @@ public class AdminConfig extends javax.swing.JFrame {
 
         txtUsuario.setEditable(false);
         txtUsuario.setBackground(new java.awt.Color(204, 255, 204));
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
+
+        txtContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraseniaKeyPressed(evt);
+            }
+        });
 
         btnAtras.setText("ATRÁS");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -168,6 +182,11 @@ public class AdminConfig extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblUsuarioKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUsuario);
 
         btnDesactivar.setText("DESACTIVAR USUARIO");
@@ -321,6 +340,22 @@ public class AdminConfig extends javax.swing.JFrame {
                 Listar();
             }
     }//GEN-LAST:event_btnDesactivarActionPerformed
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioKeyReleased
+
+    private void txtContraseniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseniaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraseniaKeyPressed
+
+    private void tblUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblUsuarioKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblUsuarioKeyReleased
 
     /**
      * @param args the command line arguments
