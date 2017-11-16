@@ -182,8 +182,8 @@ public class Busqueda extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnCita = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
-        cboArea = new javax.swing.JComboBox<>();
-        cboMedicos = new javax.swing.JComboBox<>();
+        cboArea = new javax.swing.JComboBox<String>();
+        cboMedicos = new javax.swing.JComboBox<String>();
         btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
