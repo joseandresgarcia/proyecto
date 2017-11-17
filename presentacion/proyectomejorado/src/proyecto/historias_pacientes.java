@@ -10,6 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
+import static proyecto.Historiaclinica.apelli;
+import static proyecto.Historiaclinica.txtdirec;
+import static proyecto.Registrarpaciente.apellido;
+import static proyecto.pacientes.tabla01;
 
 
 
@@ -232,20 +236,21 @@ public class historias_pacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnhistoriaActionPerformed
 
     private void abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirActionPerformed
-      
+               int fila2=tabla01.getSelectedRow();
                int fila=tabla02.getSelectedRow();
                 if (fila>-1){
-                String  nhistoria=tabla02.getValueAt(fila, 2).toString();
-           
-              
+                 String  nhistoria=tabla02.getValueAt(fila, 2).toString();
+             //    String  direccion=tabla01.getValueAt(fila2, 2).toString();
+                 
+                 
                 txtnhistoria.setText(nhistoria);
-
-                
+            //    txtdirec.setText(direccion);
                 
                     x.historias=this;
                     x.setVisible(true);
                    this.setVisible(true);
                 }
+                
         
                 
                 

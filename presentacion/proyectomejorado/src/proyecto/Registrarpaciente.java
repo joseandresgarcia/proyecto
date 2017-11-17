@@ -38,6 +38,7 @@ public class Registrarpaciente extends javax.swing.JFrame {
     String rutaimagen;
      static String nhistoria;
      static int Codigopaciente;
+     static String apellido;
     
     
     /**
@@ -469,6 +470,7 @@ public class Registrarpaciente extends javax.swing.JFrame {
         
            Statement instruccion= cn.createStatement();
           //insertando lo capturado  
+             apellido=txtapelli.getText();
            String apenom=txtapelli.getText()+txtnombre.getText();
            String  direc=txtdirec.getText();
            String  correo=txtcorreo.getText();
@@ -670,14 +672,14 @@ public class Registrarpaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblfoto;
-    private javax.swing.JTextField txtapelli;
+    public static javax.swing.JTextField txtapelli;
     private javax.swing.JTextField txtcel;
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txtdirec;
     private javax.swing.JTextField txtdni;
     private javax.swing.JTextField txtlnaci;
     private javax.swing.JTextField txtnacionalidad;
-    private javax.swing.JTextField txtnombre;
+    public static javax.swing.JTextField txtnombre;
     public static javax.swing.JTextField txtnumeroh;
     private javax.swing.JTextField txtuser;
     // End of variables declaration//GEN-END:variables

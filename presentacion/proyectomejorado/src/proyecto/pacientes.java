@@ -37,7 +37,7 @@ public class pacientes extends javax.swing.JFrame {
         imprimir();
     }
    public  static  void imprimir(){
-      String titulo[]={"CodigoPaciente","Apell.nombr","Direcc.","Correo","Sexo","Telf","fec.nacimiento","DNI","Lugar nac.","Nacion.","Estado c."};
+      String titulo[]={"CodigoPaciente","Apell.nombr","Direc.","Correo","Sexo","Telf","fec.nacimiento","DNI","Lugar nac.","Nacion.","Estado c."};
       String datos[]=new String[50];
       try{
            
