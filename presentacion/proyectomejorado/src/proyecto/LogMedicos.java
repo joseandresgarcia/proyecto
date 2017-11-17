@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  */
 public class LogMedicos extends javax.swing.JFrame {
     Hospital hospital;
-      medicos objmedi=new medicos();
+      historias_pacientes objmedi=new  historias_pacientes();
       int perfil;
       String codigo,contraseña,vcod,vcontra;
     

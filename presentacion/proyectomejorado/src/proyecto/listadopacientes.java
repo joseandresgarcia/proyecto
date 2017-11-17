@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import static proyecto.pacientes.table;
 
 /**
  *
@@ -36,37 +37,36 @@ public class listadopacientes extends javax.swing.JFrame {
         initComponents();
         imprimir();
     }
-   public  static  void imprimir(){
-      String titulo[]={"idHistoria","Apell.nombr","Direcc.","Correo","Sexo","Telf","Edad","DNI","Lugar nac.","Fecha nac.","Nacion.","Estado c."};
+    public  static  void imprimir(){
+      String titulo[]={"CodigoPaciente","Apell.nombr","Direcc.","Correo","Sexo","Telf","fec.nacimiento","DNI","Lugar nac.","Nacion.","Estado c."};
       String datos[]=new String[50];
       try{
            
-           Class.forName("com.mysql.jdbc.Driver");
-           Connection conexion=DriverManager.getConnection("jdbc:mysql://pc:3306/hospital","jose","grupo1");
-           Statement instruccion= conexion.createStatement();
-           ResultSet tabla=instruccion.executeQuery("select * from  datos_pacientes");
+            conectar cc= new conectar();
+             Connection cn = cc.conexion();
+           Statement instruccion= cn.createStatement();
+           ResultSet tabla=instruccion.executeQuery("select * from pacientes");
            table=new DefaultTableModel(null,titulo); 
            while(tabla.next()){
-              datos[0]=tabla.getString("idhistoria");
+               
+              datos[0]=tabla.getString("CodigoPaciente");
               datos[1]=tabla.getString("Apellidos_y_nombres");
               datos[2]=tabla.getString("Direccion");
               datos[3]=tabla.getString("Correo");
               datos[4]=tabla.getString("Sexo");
               datos[5]=tabla.getString("telefono");
-              datos[6]=tabla.getString("Edad");
+              datos[6]=tabla.getString("Fecha_Nacimiento");
               datos[7]=tabla.getString("DNI");
               datos[8]=tabla.getString("Lugar_de_nacimiento");
-              datos[9]=tabla.getString("Fecha_de_nacimiento");
-              datos[10]=tabla.getString("Nacionalidad");
-              datos[11]=tabla.getString("Estado_civil");
+              datos[9]=tabla.getString("Nacionalidad");
+              datos[10]=tabla.getString("Estado_civil");
+          
               
               table.addRow(datos);
            }
           tabla01.setModel(table);
          }
-           catch(ClassNotFoundException e){
-           System.out.println(e);
-       }
+        
        catch(SQLException e){
            System.out.println(e);
        }
@@ -76,12 +76,12 @@ public class listadopacientes extends javax.swing.JFrame {
       
       
  }
-   public  void buscarpaciente(String  texto){
+ public  void buscarpaciente(String  texto){
    try{
-      String datos[]=new String[50];
-    String titulos[]={"idHistoria","Apell.nombr","Direcc.","Correo","Sexo","Telf","Edad","DNI","Lugar nac.","Fecha nac.","Nacion.","Estado c."};
+    String datos[]=new String[50];
+    String titulos[]={"CodigoPaciente","Apell.nombr","Direcc.","Correo","Sexo","Telf","fec.nacimiento","DNI","Lugar nac.","Nacion.","Estado c."};
     String filtro=""+texto+"%";
-    String SQL="select *from datos_pacientes where DNI like"+'"'+filtro+'"';
+    String SQL="select *from pacientes where DNI like"+'"'+filtro+'"';
    
        table=new DefaultTableModel(null,titulos);
            conectar cc= new conectar();
@@ -91,18 +91,18 @@ public class listadopacientes extends javax.swing.JFrame {
            ResultSet tabla=instruccion.executeQuery(SQL);
            table=new DefaultTableModel(null,titulos); 
            while(tabla.next()){
-              datos[0]=tabla.getString("idhistoria");
+              datos[0]=tabla.getString("CodigoPaciente");
               datos[1]=tabla.getString("Apellidos_y_nombres");
               datos[2]=tabla.getString("Direccion");
               datos[3]=tabla.getString("Correo");
               datos[4]=tabla.getString("Sexo");
               datos[5]=tabla.getString("telefono");
-              datos[6]=tabla.getString("Edad");
+              datos[6]=tabla.getString("Fecha_Nacimiento");
               datos[7]=tabla.getString("DNI");
               datos[8]=tabla.getString("Lugar_de_nacimiento");
-              datos[9]=tabla.getString("Fecha_de_nacimiento");
-              datos[10]=tabla.getString("Nacionalidad");
-              datos[11]=tabla.getString("Estado_civil");
+              datos[9]=tabla.getString("Nacionalidad");
+              datos[10]=tabla.getString("Estado_civil");
+             
               
               table.addRow(datos);
            }
@@ -115,13 +115,9 @@ public class listadopacientes extends javax.swing.JFrame {
        catch(Exception e){
            System.out.println(e);
        }
-   
-       
-       
-       
-       
-   
+
    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

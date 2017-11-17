@@ -114,13 +114,12 @@ public class pacientes extends javax.swing.JFrame {
        catch(Exception e){
            System.out.println(e);
        }
-   
-       
-       
-       
-       
-   
+
    }
+   
+      
+   
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -334,22 +333,39 @@ public class pacientes extends javax.swing.JFrame {
 
     private void btneliminarpacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarpacActionPerformed
       int fila=tabla01.getSelectedRow();
-      String cp;
-      cp=tabla01.getValueAt(fila,0).toString();
-        try
+  
+     int paciente=Integer.parseInt(tabla01.getValueAt(fila, 0).toString());
+
+     eliminar2(paciente);
+
+    
+   
+    }//GEN-LAST:event_btneliminarpacActionPerformed
+       public   void eliminar2(int paciente){
+      
+       conectar cc= new conectar();
+       Connection cn = cc.conexion();
+              
+      try
         {
-              conectar cc= new conectar();
-              Connection cn = cc.conexion();
-         Statement instruccion = cn.createStatement();   
+              
+            
+              Statement instruccion = cn.createStatement();  
          
        
-      int  j=instruccion.executeUpdate("DELETE FROM pacientes WHERE  CodigoPaciente='"+cp+"'");
-         if(j>0){
+        int  j= instruccion.executeUpdate("delete From  historiaclinica where  CodigoPaciente ="+ paciente);
+                
+         if(j>0) {
+              int  k= instruccion.executeUpdate("delete From   pacientes where  CodigoPaciente ="+ paciente);
+                
+              if(k>0){
              
-          imprimir();
-             JOptionPane.showMessageDialog(null,"se elimino correctamente ");
-          txtbusqueda.setText(  "");   
-
+        
+               JOptionPane.showMessageDialog(null,"se elimino correctamente ");
+               imprimir();  
+ 
+               }
+           
          }
          else{
          JOptionPane.showMessageDialog(null,"NO SE SELECCIONO FILA O LA TABLA ESTA VACIA...!!! ");
@@ -357,16 +373,42 @@ public class pacientes extends javax.swing.JFrame {
         }
            
         catch(SQLException e){ System.out.println("No se encuentra el paciente  a eliminar "); }   
-        catch(Exception e){ System.out.println(e); }
+       
         
-        
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_btneliminarpacActionPerformed
-
+      
+      
+      }
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -416,4 +458,6 @@ public class pacientes extends javax.swing.JFrame {
     public static javax.swing.JTable tabla01;
     private javax.swing.JTextField txtbusqueda;
     // End of variables declaration//GEN-END:variables
+
+  
 }
