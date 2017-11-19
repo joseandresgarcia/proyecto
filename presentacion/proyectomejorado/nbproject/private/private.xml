@@ -12,6 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/pc1/Documents/GitHub/proyecto/presentacion/proyectomejorado/src/proyecto/CrearHorario_new.java</file>
             <file>file:/C:/Users/pc1/Documents/GitHub/proyecto/presentacion/proyectomejorado/src/proyecto/historias_pacientes.java</file>
             <file>file:/C:/Users/pc1/Documents/GitHub/proyecto/presentacion/proyectomejorado/src/proyecto/Horario.java</file>
@@ -51,6 +52,9 @@
             <file>file:/C:/Users/pc1/Documents/GitHub/proyecto/presentacion/proyectomejorado/src/proyecto/LogMedicos.java</file>
             <file>file:/C:/Users/pc1/Documents/GitHub/proyecto/presentacion/proyectomejorado/src/proyecto/caja.java</file>
             <file>file:/C:/Users/pc1/Documents/GitHub/proyecto/presentacion/proyectomejorado/src/proyecto/medicos.java</file>
+=======
+            <file>file:/C:/Users/pc1/Documents/GitHub/proyecto/presentacion/proyectomejorado/src/proyecto/Horario.java</file>
+>>>>>>> 9d32edcf4a830670cc73568d8a52153c4c25425c
         </group>
     </open-files>
 </project-private>
