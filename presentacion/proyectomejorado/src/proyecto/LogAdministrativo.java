@@ -46,13 +46,6 @@ public class LogAdministrativo extends javax.swing.JFrame {
         fondo2.setIcon(dos); getLayeredPane().add(fondo2,JLayeredPane.FRAME_CONTENT_LAYER);
         fondo2.setBounds(0,0,dos.getIconWidth(),dos.getIconHeight());    
         
-        
-        
-        
-        
-        
-        
-        
     }
 
     
@@ -195,7 +188,7 @@ public class LogAdministrativo extends javax.swing.JFrame {
     }
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         verificar();
-        }
+    }
     void calculo(){
         if(i==3)
             {
@@ -229,7 +222,7 @@ public class LogAdministrativo extends javax.swing.JFrame {
                Statement instruccion=cn.createStatement();
          
                ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
-                                                    + " where idusuario='" + vcod +"'");
+                                                    + " where idusuario='" + vcod +"' and Perfil_Codigo=1");
             if(j.next())
               {
               

@@ -58,7 +58,7 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
               
                 if(j.getString("contrasenia").equals(vcontra))
                 {
-                perfil=j.getInt("Perfil_codigo");     
+                    perfil=j.getInt("Perfil_codigo");     
                 }
                 else{  JOptionPane.showMessageDialog(null,"contraseña incorrecta"); }
               
