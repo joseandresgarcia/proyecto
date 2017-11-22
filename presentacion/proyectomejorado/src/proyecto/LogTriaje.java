@@ -51,6 +51,7 @@ public class LogTriaje extends javax.swing.JFrame {
     public   void    ingresar  (){
            vcod=txtcodtriaje.getText();
            vcontra=txtcontratriaje.getText();
+           boolean Acceso=false;
          
         try{
                
@@ -59,29 +60,27 @@ public class LogTriaje extends javax.swing.JFrame {
         
                Statement instruccion=cn.createStatement();
          
-               ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
-                                                    + " where idusuario='" + vcod +"'");
-               if(j.next())
+               ResultSet j=instruccion.executeQuery("select contrasenia from login"
+                                                    + " where idusuario='" + vcod +"' and Perfil_Codigo=3");
+               while(j.next())
                {
               
-                if(j.getString("contrasenia").equals(vcontra))
-                {
-                perfil=j.getInt("Perfil_codigo");     
-                }
-               else{  JOptionPane.showMessageDialog(null,"contraseña incorrecta"); }
-                 if(perfil>0)
+                  if(j.getString("contrasenia").equals(vcontra))
                   {
-                
+                    
+                  Acceso=true;  
                   consultas.triaje=this;
                   consultas.setVisible(true);
-                  this.setVisible(false);              
+                  this.setVisible(false);   
+                  break;
                   }
-                  }
-            
-               else
-              {
-             JOptionPane.showMessageDialog(null,"error  ,intente de nuevo ");
-             }
+          
+                
+               }
+                 if(Acceso==false)
+                 {
+                  JOptionPane.showMessageDialog(null,"El usuario y/o  la contraseña son incorrectas ");
+                 }
           }
        
             catch(SQLException e)
@@ -111,8 +110,10 @@ public class LogTriaje extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel3.setText("USUARIO DE TRIAJE");
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("CODIGO         :");
 
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("CONTRASEÑA:");
 
         jScrollPane1.setViewportView(txtcodtriaje);

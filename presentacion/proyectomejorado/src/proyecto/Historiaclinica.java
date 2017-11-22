@@ -32,14 +32,14 @@ public class Historiaclinica extends javax.swing.JFrame {
         initComponents();
         
            //DISEÑO 
-        setLocationRelativeTo(null);//para centrar el formulario 
-        setResizable(false);//para que no se maximice la pantalla
-        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono2.png")).getImage());//paa cambiar el icono del jfrane
-       //para cambiar el fondo
-        ((JPanel)getContentPane()).setOpaque(false); ImageIcon dos=new
-        ImageIcon(this.getClass().getResource("/imagenes/hc.jpg")); JLabel fondo2= new JLabel();
-        fondo2.setIcon(dos); getLayeredPane().add(fondo2,JLayeredPane.FRAME_CONTENT_LAYER);
-        fondo2.setBounds(0,0,dos.getIconWidth(),dos.getIconHeight()); 
+         setLocationRelativeTo(null);//para centrar el formulario 
+         setResizable(false);//para que no se maximice la pantalla
+         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono2.png")).getImage());//paa cambiar el icono del jfrane
+        //para cambiar el fondo
+         ((JPanel)getContentPane()).setOpaque(false); ImageIcon dos=new
+         ImageIcon(this.getClass().getResource("/imagenes/hc.jpg")); JLabel fondo2= new JLabel();
+         fondo2.setIcon(dos); getLayeredPane().add(fondo2,JLayeredPane.FRAME_CONTENT_LAYER);
+         fondo2.setBounds(0,0,dos.getIconWidth(),dos.getIconHeight()); 
         
         
         

@@ -21,61 +21,65 @@ import javax.swing.JPanel;
  */
 public class LogInfomes extends javax.swing.JFrame {
 Hospital hospital;
-INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
+INFORME_DE_PACIENTES informedepacientes=new INFORME_DE_PACIENTES();
 
           int perfil;
           String codigo,contraseña,vcod,vcontra;
 
 
-    /**
-     * Creates new form LogCaja
-     */
+   
     public LogInfomes() {
         initComponents();
           
-        
+        //DISEÑO 
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono4.png")).getImage());
+       //para cambiar el fondo
+        ((JPanel)getContentPane()).setOpaque(false); ImageIcon dos=new
+        ImageIcon(this.getClass().getResource("/imagenes/fondoadmin.jpg")); JLabel fondo2= new JLabel();
+        fondo2.setIcon(dos); getLayeredPane().add(fondo2,JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo2.setBounds(0,0,dos.getIconWidth(),dos.getIconHeight());   
         
         
         
     }
     
      
-      public   void    ingresar  (){
+    public   void    ingresar  (){
+           boolean Acceso=false;
            vcod=txtcod.getText();
            vcontra=txtcontra.getText();
+          
          
         try{
                
-               conectar cc= new conectar();
-               Connection cn = cc.conexion(); 
+                conectar cc= new conectar();
+                Connection cn = cc.conexion(); 
         
-               Statement instruccion=cn.createStatement();
+                Statement instruccion=cn.createStatement();
          
-               ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
-                                                    + " where idusuario='" + vcod +"'");
-               if(j.next())
-               {
-              
-                if(j.getString("contrasenia").equals(vcontra))
+                ResultSet j=instruccion.executeQuery("select contrasenia from login"
+                                                    + " where idusuario='" + vcod +"'  and Perfil_Codigo=6");
+                while(j.next())
                 {
-                    perfil=j.getInt("Perfil_codigo");     
-                }
-                else{  JOptionPane.showMessageDialog(null,"contraseña incorrecta"); }
               
-                 if(perfil>0)
-                  {
-                      informedepasientes.logininforme=this;
-                      informedepasientes.setVisible(true);
-                      this.setVisible(false);
-                            
-                  }
+                 if(j.getString("contrasenia").equals(vcontra))
+                      {
+                 
+                       Acceso=true;
+                       informedepacientes.logininforme=this;
+                       informedepacientes.setVisible(true);
+                       this.setVisible(false);
+                       break;
+                       }
+             
                }
-
-              else
-              {
-             JOptionPane.showMessageDialog(null,"error  ,intente de nuevo ");
-             }
-            }
+               if(Acceso==false)
+                {
+                 JOptionPane.showMessageDialog(null,"El usuario y/o la contraseña son incorrectas ");
+                }
+              }
        
             catch(SQLException e)
             { System.out.println(e); }
@@ -104,6 +108,7 @@ INFORME_DE_PACIENTES informedepasientes=new INFORME_DE_PACIENTES();
         btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel3.setText("USUARIO DE INFORMES");

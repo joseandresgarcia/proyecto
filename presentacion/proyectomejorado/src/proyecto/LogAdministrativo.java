@@ -6,7 +6,6 @@
 package proyecto;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,25 +14,36 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import static jdk.nashorn.internal.objects.NativeDate.getDate;
-import static proyecto.pacientes.imprimir;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 
-/**
- *
- * @author JESUS HAYLEN
- */
+
 public class LogAdministrativo extends javax.swing.JFrame {
+    
+    
+   
+        private int x;
+        private int y;
+        protected void this_mousePressed(MouseEvent e) {
+                x = e.getX();
+                y = e.getY();
+        }
+        protected void this_mouseDragged(MouseEvent e) {
+                Point point = MouseInfo.getPointerInfo().getLocation();
+                setLocation(point.x - x, point.y - y);
+        }
+    
+    
+    
           Hospital hospital;
           Controles controles=new Controles();
           Desbloqueo desbloqueo=new Desbloqueo();
+       
+          String codigo,contraseña,vcod,vcontra;
           int perfil;
-    /**
-     * Creates new form login
-     */
-    String codigo,contraseña,vcod,vcontra;
-    
-    int i;
-    int k=0;
+          int i;
+          int k=0;
     public LogAdministrativo() {
         initComponents();
              //DISEÑO 
@@ -115,6 +125,7 @@ public class LogAdministrativo extends javax.swing.JFrame {
             }
         });
 
+        txtCodigo.setBackground(new java.awt.Color(0, 0, 102));
         txtCodigo.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         jScrollPane1.setViewportView(txtCodigo);
 
@@ -167,7 +178,7 @@ public class LogAdministrativo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
                     .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,7 +233,7 @@ public class LogAdministrativo extends javax.swing.JFrame {
                Statement instruccion=cn.createStatement();
          
                ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
-                                                    + " where idusuario='" + vcod +"' and Perfil_Codigo=1");
+                                                    + " where idusuario='" + vcod +"' and Perfil_Codigo=2");
             if(j.next())
               {
               
@@ -233,10 +244,10 @@ public class LogAdministrativo extends javax.swing.JFrame {
               }
             if(perfil>0)
             {
-             JOptionPane.showMessageDialog(null,"acceso correccto a administrativo");
-             controles.logadministrativo=this;
-             controles.setVisible(true);
-             this.setVisible(false);              
+            
+              controles.logadministrativo=this;
+              controles.setVisible(true);
+              this.setVisible(false);              
             }
            else
            {

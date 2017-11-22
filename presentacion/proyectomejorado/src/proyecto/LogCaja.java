@@ -38,7 +38,7 @@ public class LogCaja extends   javax.swing.JFrame{
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono4.png")).getImage());//paa cambiar el icono del jfrane
        //para cambiar el fondo
         ((JPanel)getContentPane()).setOpaque(false); ImageIcon dos=new
-        ImageIcon(this.getClass().getResource("/imagenes/fondo5.jpg")); JLabel fondo2= new JLabel();
+        ImageIcon(this.getClass().getResource("/imagenes/fondoadmin.jpg")); JLabel fondo2= new JLabel();
         fondo2.setIcon(dos); getLayeredPane().add(fondo2,JLayeredPane.FRAME_CONTENT_LAYER);
         fondo2.setBounds(0,0,dos.getIconWidth(),dos.getIconHeight());   
    
@@ -52,9 +52,9 @@ public class LogCaja extends   javax.swing.JFrame{
     @SuppressWarnings("unchecked")
     
       public   void    ingresar  (){
-           vcod=txtcodcaja.getText();
-           vcontra=txtcontracaja.getText();
-         
+            vcod=txtcodcaja.getText();
+            vcontra=txtcontracaja.getText();
+           boolean acceso=false;
         try{
                
                conectar cc= new conectar();
@@ -62,29 +62,28 @@ public class LogCaja extends   javax.swing.JFrame{
         
                Statement instruccion=cn.createStatement();
          
-               ResultSet j=instruccion.executeQuery("select contrasenia,Perfil_codigo from login"
-                                                    + " where idusuario='" + vcod +"'");
-               if(j.next())
+               ResultSet j=instruccion.executeQuery("select contrasenia  from login"
+                                                    + " where idusuario='" + vcod +"'and Perfil_Codigo=4");
+               while(j.next())
                {
               
                 if(j.getString("contrasenia").equals(vcontra))
                 {
-                perfil=j.getInt("Perfil_codigo");     
-                }
-               else{  JOptionPane.showMessageDialog(null,"contraseña incorrecta"); }
-                 if(perfil>0)
-                  {
-                
+                  acceso =true;
+                     
                  objcaja.logcaja=this;
                  objcaja.setVisible(true);
-                 this.setVisible(false);              
-                  }
+                 this.setVisible(false);
+                 break;
+                
+                
+                }
                }
-            
-              else
-              {
-             JOptionPane.showMessageDialog(null,"error  ,intente de nuevo ");
-             }
+              
+            if(acceso==false)
+               {
+              JOptionPane.showMessageDialog(null,"El usuario y/o la contraseña son incorrectos ");
+               }
           }
        
             catch(SQLException e)
@@ -111,6 +110,7 @@ public class LogCaja extends   javax.swing.JFrame{
         btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel3.setText("USUARIO DE CAJA");

@@ -17,10 +17,10 @@ public class CrearCuentas extends javax.swing.JFrame {
     AdminConfig adminconfig=new AdminConfig();
     CrearPerfil CrearPerfiles=new CrearPerfil();
     CuentasInformes cuentasinformes=new CuentasInformes();
-    CuentasMedicos cuentasmedicos=new CuentasMedicos();
-    CuentasTriaje cuentastriaje=new CuentasTriaje();
-    CuentasAdmision cuentasadmision=new CuentasAdmision();
-    CuentasCaja cuentascaja=new CuentasCaja();
+    
+
+   
+    
     public CrearCuentas() {
         initComponents();
     }
