@@ -60,7 +60,7 @@ public class LogMedicos extends javax.swing.JFrame {
                Statement instruccion=cn.createStatement();
          
                ResultSet j=instruccion.executeQuery("select contrasenia from login"
-                                                    + " where idusuario='" + vcod +"' and Perfil_Codigo=2");
+                                                    + " where idusuario='" + vcod +"' and Perfil_Codigo=1");
                while(j.next())
                {
               
