@@ -14,7 +14,11 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import proyecto.Hospital.hora;
@@ -34,7 +38,26 @@ public class pacientes extends javax.swing.JFrame {
      */
     public pacientes() {
         initComponents();
+        
+        //DISEÑO 
+        setLocationRelativeTo(null);//para centrar el formulario 
+        setResizable(false);//para que no se maximice la pantalla
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono2.png")).getImage());//paa cambiar el icono del jfrane
+       //para cambiar el fondo
+        ((JPanel)getContentPane()).setOpaque(false); ImageIcon dos=new
+        ImageIcon(this.getClass().getResource("/imagenes/pacientes.jpg")); JLabel fondo2= new JLabel();
+        fondo2.setIcon(dos); getLayeredPane().add(fondo2,JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo2.setBounds(0,0,dos.getIconWidth(),dos.getIconHeight()); 
+     
+        
+        
+        
+        
+        
+        
+        
         imprimir();
+ 
     }
    public  static  void imprimir(){
       String titulo[]={"CodigoPaciente","Apell.nombr","Direcc.","Correo","Sexo","Telf","fec.nacimiento","DNI","Lugar nac.","Nacion.","Estado c."};

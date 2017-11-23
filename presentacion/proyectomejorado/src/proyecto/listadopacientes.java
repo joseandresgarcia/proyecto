@@ -35,6 +35,18 @@ public class listadopacientes extends javax.swing.JFrame {
      */
     public listadopacientes() {
         initComponents();
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         imprimir();
     }
     public  static  void imprimir(){

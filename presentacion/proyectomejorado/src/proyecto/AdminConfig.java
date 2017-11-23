@@ -14,17 +14,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author JESUS HAYLEN
- */
 public class AdminConfig extends javax.swing.JFrame {
     CrearCuentas crearcuentas;
-    /**
-     * Creates new form AdminConfig
-     */
-//    CuentaActualizada cuentaactualizada=new CuentaActualizada();
-  //  String codactual,codnuevo,contraactual,contranuevo,desbloqueo;
+
     public AdminConfig() {
         initComponents();
         Listar();
